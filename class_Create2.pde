@@ -1,7 +1,6 @@
 import processing.serial.*;
 import processing.core.*;
 import org.apache.commons.logging.impl.SimpleLog;
-//import java.io.*;
 
 class Create2 {
   PApplet app;
@@ -43,6 +42,8 @@ class Create2 {
 
     //self.ser.write(struct.pack('B' * len(bytes), *bytes))
     /*
+    //>>> import java.io.*;
+
     ByteArrayOutputStream b = new ByteArrayOutputStream();
      DataOutputStream d = new DataOutputStream(b);
      try {
@@ -68,7 +69,7 @@ class Create2 {
   byte[] serialRead(int theNum)
   {
     /* Read a string of 'num_bytes' bytes from the robot.
-     
+
      Arguments:
      num_bytes: The number of bytes we expect to read.
      */
@@ -196,18 +197,18 @@ class Create2 {
 
   void drive_straight(int velocity) {
     /* Will make the Create2 drive straight at the given velocity
-     
+
      Arguments:
      velocity: Velocity of the Create2 in mm/s. Positive velocities are forward,
      negative velocities are reverse. Max speeds are still enforced by drive()
-     
+
      */
     this.drive(velocity, 32767);
   }
 
   void  turn_clockwise(int velocity) {
     /* Makes the Create2 turn in place clockwise at the given velocity
-     
+
      Arguments:
      velocity: Velocity of the Create2 in mm/s. Positive velocities are forward,
      negative velocities are reverse. Max speeds are still enforced by drive()
@@ -217,7 +218,7 @@ class Create2 {
 
   void  turn_counter_clockwise(int velocity) {
     /* Makes the Create2 turn in place counter clockwise at the given velocity
-     
+
      Arguments:
      velocity: Velocity of the Create2 in mm/s. Positive velocities are forward,
      negative velocities are reverse. Max speeds are still enforced by drive()
@@ -227,7 +228,7 @@ class Create2 {
 
   void drive(int velocity, int radius) {
     /*"""Controls the Create 2's drive wheels.
-     
+
      Args:
      velocity: A number between -500 and 500. Units are mm/s.
      radius: A number between -2000 and 2000. Units are mm.
@@ -280,7 +281,7 @@ class Create2 {
 
   void motors_pwm(int main_pwm, int side_pwm, int vacuum_pwm) {
     /* Serial sequence: [144] [Main Brush PWM] [Side Brush PWM] [Vacuum PWM]
-     
+
      main_pwm: Duty cycle for Main Brush. Value from -127 to 127. Positive speeds spin inward.
      side_pwm: Duty cycle for Side Brush. Value from -127 to 127. Positive speeds spin counterclockwise.
      vacuum_pwm: Duty cycle for Vacuum. Value from 0-127. No negative speeds allowed.
@@ -312,7 +313,7 @@ class Create2 {
       this.serialSend(config.getJSONObject("opcodes").getInt("motors_pwm"), data);
     else
       logError("Invalid data, failed to send");
-  }   
+  }
 
 
   /////////////////////////////////////////////////////////////////////////////////
@@ -321,7 +322,7 @@ class Create2 {
 
   void sensors(int thePacketID) {
     /* Requests the OI to send a packet of sensor data bytes.
-     
+
      Arguments:
      packet_id: Identifies which of the 58 sensor data packets should be sent back by the OI.
      */
@@ -337,10 +338,10 @@ class Create2 {
 
   boolean getPacket(int thePacketID) {
     /* Requests and reads a packet from the Create 2
-     
+
      Arguments:
      packet_id: The id of the packet you wish to collect.
-     
+
      Returns: False if there was an error, True if the packet successfully came through.
      */
     String packet_id = String.valueOf(thePacketID);
@@ -369,7 +370,7 @@ class Create2 {
 
   void digit_led_ascii(String display_string) {
     /*"""This command controls the four 7 segment displays using ASCII character codes.
-     
+
      Arguments:
      display_string: A four character string to be displayed. This must be four
      characters. Any blank characters should be represented with a space: ' '
@@ -443,7 +444,7 @@ class Create2 {
     else
       logError("Invalid data, failed to send");
   }
-  void create_song(int song_number, int[] play_list) {    
+  void create_song(int song_number, int[] play_list) {
     logError("create_song: METHOD NOT YET IMPLEMENTED");
   }
   void play(int song_number) {
@@ -454,7 +455,7 @@ class Create2 {
     else
       logError("Invalid data, failed to send");
   }
-  void play_note(int note_name, int note_duration) {    
+  void play_note(int note_name, int note_duration) {
     /* Plays a single note by creating a 1 note song in song 0 */
     int current_song = 0;
     int[] play_list;
@@ -482,7 +483,7 @@ class Create2 {
 
 
   void logInfo(String title, Object... msgList)
-  {   
+  {
     title = title.toUpperCase();
     String divider = "  ";
     for (int i = 0; i < PApplet.max(50-title.length(), 0); i++)
@@ -496,7 +497,7 @@ class Create2 {
   }
 
   void logDebug(String title, Object... msgList)
-  {   
+  {
     title = title.toUpperCase();
     String divider = "  ";
     for (int i = 0; i < PApplet.max(49-title.length(), 0); i++)
@@ -510,7 +511,7 @@ class Create2 {
   }
 
   void logError(String title, Object... msgList)
-  {   
+  {
     title = title.toUpperCase();
     String divider = " ";
     for (int i = 0; i < PApplet.max(50-title.length(), 0); i++)
